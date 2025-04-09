@@ -73,7 +73,7 @@
       color: #00ff88;
       display: none;
     }
-    input[type="text"] {
+    input[type="text"], input[type="file"] {
       padding: 10px;
       margin-top: 10px;
       border-radius: 5px;
@@ -90,9 +90,9 @@
   <div class="offer">
     <h2>Offer 1</h2>
     <p>Send 5 Messages In Our Discord Server (submit images, we’ll review them)</p>
-    <input type="text" id="user1" placeholder="Enter in your Roblox user">
-    <br><br>
-    <button class="yes-button" onclick="sendWebhook(1)">Done</button>
+    <input type="text" id="user1" placeholder="Enter in your Roblox user"><br><br>
+    <input type="file" id="proofImage" accept="image/*"><br><br>
+    <button class="yes-button" onclick="sendWebhookWithImage()">Submit Image</button>
   </div>
 
   <div class="offer">
@@ -178,6 +178,23 @@
         },
         body: JSON.stringify(message)
       });
+    }
+
+    function sendWebhookWithImage() {
+      const username = document.getElementById('user1').value;
+      const fileInput = document.getElementById('proofImage');
+      const file = fileInput.files[0];
+
+      if (!username || !file) return alert('Please enter your Roblox user and select an image.');
+
+      const formData = new FormData();
+      formData.append('content', `📷 Offer 1 proof submitted by: ${username}`);
+      formData.append('file', file);
+
+      fetch(WEBHOOK_URL, {
+        method: 'POST',
+        body: formData
+      }).then(() => alert('Image submitted! We will review it shortly.'));
     }
   </script>
 </body>
